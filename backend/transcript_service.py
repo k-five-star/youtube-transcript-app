@@ -6,20 +6,22 @@ from dotenv import load_dotenv
 import openai
 import os
 
-# 환경 변수 로드
 load_dotenv()
 openai.api_key = os.environ.get('OPEN_AI_API_KEY')
 
 app = FastAPI()
 
+# CORS 설정 수정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",  # 로컬 개발용
+        os.getenv("CORS_ORIGIN", ""),  # Vercel 도메인
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 class VideoRequest(BaseModel):
     video_id: str
 

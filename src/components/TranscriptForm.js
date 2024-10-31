@@ -1,6 +1,9 @@
 'use client';
 import { useState } from 'react';
 
+// API_URL을 환경변수로 설정
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export default function TranscriptForm({ transcript, loading, setTranscript, setSummary, setLoading }) {
   const [url, setUrl] = useState('');
 
@@ -21,7 +24,7 @@ export default function TranscriptForm({ transcript, loading, setTranscript, set
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/get-transcript', {
+      const response = await fetch(`${API_URL}/api/get-transcript`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ export default function TranscriptForm({ transcript, loading, setTranscript, set
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/summarize', {
+      const response = await fetch(`${API_URL}/api/summarize`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +100,7 @@ export default function TranscriptForm({ transcript, loading, setTranscript, set
           <button
             type="button"
             onClick={handleSummarize}
-            disabled={!transcript}
+            disabled={!transcript || loading}
             className="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors disabled:bg-gray-400"
           >
             요약하기
