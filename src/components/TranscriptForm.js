@@ -28,8 +28,10 @@ export default function TranscriptForm({ transcript, loading, setTranscript, set
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ video_id: videoId }),
+        mode: 'cors'
       });
 
       const data = await response.json();
