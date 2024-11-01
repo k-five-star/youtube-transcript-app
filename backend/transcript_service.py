@@ -16,7 +16,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",  # 로컬 개발용
-        os.getenv("CORS_ORIGIN", ""),  # Vercel 도메인
+        "https://youtube-transcript-5ntgyvznp-k-five-stars-projects.vercel.app",  # 프론트엔드 배포 URL
+        "https://youtube-transcript-app-fivestar.up.railway.app"  # 백엔드 URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
